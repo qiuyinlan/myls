@@ -304,7 +304,7 @@ void list_directory(const char *dir_path, DisplayOptions *options) {
                 strcmp(list->files[i].path, "..") != 0) {
                 char new_path[MAX_PATH_LENGTH];
                 if (snprintf(new_path, sizeof(new_path), "%s/%s", 
-                             dir_path, list->files[i].path) >= (size_t)sizeof(new_path)) {
+                             dir_path, list->files[i].path) >= sizeof(new_path)) {
                     fprintf(stderr, "Path too long: %s/%s\n", dir_path, list->files[i].path);
                     continue;
                 }
