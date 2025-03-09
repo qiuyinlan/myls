@@ -1,0 +1,92 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "编译Shell项目",
+            "command": "/usr/bin/g++",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-g",
+                "${workspaceFolder}/shell.cpp",
+                "-o",
+                "${workspaceFolder}/shell",
+                "-Wall",
+                "-Wextra"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "编译整个Shell项目"
+        },
+        {
+            "type": "cppbuild",
+            "label": "C: gcc 编译当前文件",
+            "command": "/usr/bin/gcc",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-g",
+                "${file}",
+                "-o",
+                "${fileDirname}/${fileBasenameNoExtension}",
+                "-Wall",
+                "-Wextra"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build",
+            "detail": "编译当前C文件"
+        },
+        {
+            "type": "cppbuild",
+            "label": "C++: g++ 编译当前文件",
+            "command": "/usr/bin/g++",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-g",
+                "${file}",
+                "-o",
+                "${fileDirname}/${fileBasenameNoExtension}",
+                "-Wall",
+                "-Wextra"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build",
+            "detail": "编译当前C++文件"
+        },
+        {
+            "label": "运行Shell程序",
+            "type": "shell",
+            "command": "${workspaceFolder}/shell",
+            "dependsOn": [
+                "编译Shell项目"
+            ],
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "new",
+                "focus": true
+            },
+            "detail": "运行编译后的Shell程序"
+        }
+    ]
+}

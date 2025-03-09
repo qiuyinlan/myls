@@ -1,0 +1,36 @@
+#include<stdio.h>
+什么情况下会明显看到延迟
+延迟在以下情况下会变得明显：
+1. 长时间运行的交互式程序
+
+
+fflush
+
+
+#include <stdio.h>
+#include <unistd.h>
+
+int main() {
+    printf("请等待系统准备就绪");  // 没有\n
+    sleep(3);  // 暂停3秒
+    
+    char input[100];
+    scanf("%s", input);  // 等待用户输入
+    
+    return 0;
+}
+在这个例子中，用户可能会面对空白屏幕3秒，不知道程序在等待什么。
+
+
+# argv，argc
+argc命令行参数个数，argv字符指针数组，指针指向每一个命令行参数
+char*  指向字符型类型的指针
+char** 指向字符指针的指针
+
+argv：传递给Shell程序本身的参数
+args：用户在Shell中输入的命令参数
+args通常用于程序内部的函数参数，表示一个通用的参数数组
+
+# io
+系统io直接调用系统操作的系统调用
+标准io,和用户交互有关

@@ -58,6 +58,7 @@
   "C_Cpp_Runner.msvcSecureNoWarnings": false,
   "files.associations": {
     "errno.h": "c",
-    "cstdlib": "c"
+    "cstdlib": "c",
+    "疑问": "cpp"
   }
 }
