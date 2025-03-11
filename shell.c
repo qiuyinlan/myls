@@ -7,6 +7,7 @@
 #include <fcntl.h>
 #include <signal.h>
 #include <pwd.h>
+#include <time.h>
 
 #define MAX_INPUT_SIZE 1024
 #define MAX_ARGS 64
@@ -35,6 +36,7 @@ void free_args(char **args);
 void ignore_signals();
 void sigint_handler(int sig);
 void sigtstp_handler(int sig);
+int another_function(char **args);
 
 // 显示欢迎信息
 void show_welcome() {
@@ -94,7 +96,7 @@ void read_command(char *line) {
 char **split_line(char *line, char *delim) {
     int bufsize = MAX_ARGS;
     int position = 0;
-    char **tokens = malloc(bufsize * sizeof(char*));
+    char **tokens = (char**)malloc(bufsize * sizeof(char*));
     char *token;
     
     if (!tokens) {
@@ -109,7 +111,7 @@ char **split_line(char *line, char *delim) {
         
         if (position >= bufsize) {
             bufsize += MAX_ARGS;
-            tokens = realloc(tokens, bufsize * sizeof(char*));
+            tokens = (char**)realloc(tokens, bufsize * sizeof(char*));
             if (!tokens) {
                 fprintf(stderr, "myshell: 内存分配错误\n");
                 exit(EXIT_FAILURE);
@@ -143,6 +145,7 @@ char **parse_command(char *line, int *background) {
 
 // 处理内置命令
 int handle_builtin(char **args) {
+    (void)args;  // 标记参数为未使用
     if (args[0] == NULL) {
         return 0;
     }
@@ -188,6 +191,7 @@ int handle_builtin(char **args) {
 
 // cd命令
 int cmd_cd(char **args) {
+    (void)args;  // 标记参数为未使用
     if (args[1] == NULL) {
         // 没有参数，切换到HOME目录
         char *home = getenv("HOME");
@@ -232,11 +236,13 @@ int cmd_cd(char **args) {
 
 // exit命令
 int cmd_exit(char **args) {
+    (void)args;  // 标记参数为未使用
     return 0; // 返回0会导致shell退出
 }
 
 // help命令
 int cmd_help(char **args) {
+    (void)args;  // 标记参数为未使用
     printf("MyShell - 一个简单的shell实现\n");
     printf("内置命令:\n");
     printf("  cd [目录]   - 切换工作目录\n");
@@ -254,6 +260,7 @@ int cmd_help(char **args) {
 
 // clear命令
 int cmd_clear(char **args) {
+    (void)args;  // 标记参数为未使用
     system("clear");
     return 0;
 }
@@ -422,6 +429,7 @@ int execute_command(char **args, int background) {
     
     if (pid == 0) {
         // 子进程
+        signal(SIGINT, SIG_IGN);  // 在子进程中忽略Ctrl+C
         
         // 处理重定向
         if (redirect_io(args) != 0) {
@@ -462,6 +470,7 @@ int execute_command(char **args, int background) {
 // 忽略信号
 void ignore_signals() {
     signal(SIGINT, SIG_IGN);  // 忽略Ctrl+C
+    signal(SIGTSTP, SIG_DFL); // 恢复Ctrl+Z的默认行为
 }
 
 // 释放参数数组
@@ -473,12 +482,13 @@ void free_args(char **args) {
 
 // SIGINT (Ctrl+C) 处理函数
 void sigint_handler(int sig) {
-    printf("\n");  // 只打印一个换行符
-    print_prompt();  // 重新显示提示符
+    (void)sig;  // 标记参数为未使用
+    print_prompt();
 }
 
 // SIGTSTP (Ctrl+Z) 处理函数
 void sigtstp_handler(int sig) {
+    (void)sig;  // 标记参数为未使用
     printf("\n退出Shell程序...\n");
     exit(0);
 }
@@ -497,27 +507,8 @@ int main() {
     // 显示欢迎信息
     show_welcome();
     
-    // 注册信号处理器（移除日志输出）
-    struct sigaction sa_int, sa_tstp;
-    
-    // 设置SIGINT处理器
-    sa_int.sa_handler = sigint_handler;
-    sigemptyset(&sa_int.sa_mask);
-    sa_int.sa_flags = 0;
-    
-    // 设置SIGTSTP处理器
-    sa_tstp.sa_handler = sigtstp_handler;
-    sigemptyset(&sa_tstp.sa_mask);
-    sa_tstp.sa_flags = 0;
-    
-    // 注册处理器（移除成功日志）
-    if (sigaction(SIGINT, &sa_int, NULL) == -1) {
-        perror("无法注册SIGINT信号处理器");
-    }
-    
-    if (sigaction(SIGTSTP, &sa_tstp, NULL) == -1) {
-        perror("无法注册SIGTSTP信号处理器");
-    }
+    // 忽略信号
+    ignore_signals();
     
     // 主循环
     while (status) {
@@ -545,4 +536,10 @@ int main() {
     }
     
     return 0;
+}
+
+int another_function(char **args) {
+    (void)args;  // 标记参数为未使用
+    // 函数体
+    return 0;  // 确保返回一个整数值
 }
