@@ -59,6 +59,7 @@
   "files.associations": {
     "errno.h": "c",
     "cstdlib": "c",
-    "疑问": "cpp"
+    "疑问": "cpp",
+    "time.h": "c"
   }
 }
