@@ -10,7 +10,9 @@ fflush
 #include <unistd.h>
 
 int main() {
-printf("请等待系统准备就绪");  // 没有\n
+printf("请等待系统准备就绪");
+
+// 没有\n
 sleep(3);  // 暂停3秒
 
 char input[100];
