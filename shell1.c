@@ -45,6 +45,7 @@ int redirect(const char* filename, int mode, int target_fd) {
 }
 
 // 处理单条命令
+
 void process_cmd(char* cmdstr, int input_fd, int output_fd, int run_back) {
     static char last_d[PATH_MAX] = ""; 
     char* args[AR_MAX];
