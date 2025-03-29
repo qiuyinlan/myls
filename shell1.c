@@ -41,6 +41,7 @@ int redirect(const char* filename, int mode, int target_fd) {
     }
     
     close(fd);
+    
     return 0;
 }
 
