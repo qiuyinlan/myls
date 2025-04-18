@@ -23,6 +23,7 @@ class Threadpool
     }
     ~Threadpool()
     {
+        
         {
         unique_lock<std::mutex> lock(queueMutex);
         stop = true;
