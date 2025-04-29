@@ -27,7 +27,10 @@ void Expend(lock_t* account, int amount) {
 
 // 销毁互斥锁
 void amountDestroy(lock_t* account) {
-    
+
+
     pthread_mutex_destroy(&account->mutex);  // 销毁互斥锁
 }
   
+
+ 
