@@ -12,6 +12,7 @@ void amountInit(lock_t* account) {
 // 进行资金收入操作
 void Income(lock_t* account, int amount) {
     pthread_mutex_lock(&account->mutex);  // 加锁
+    
     account->amount += amount;  // 增加金额
     pthread_mutex_unlock(&account->mutex);  // 解锁
     perror("This function is not implemented");  // 保留原有报错信息
