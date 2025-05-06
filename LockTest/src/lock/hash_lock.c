@@ -84,6 +84,7 @@ int setKey(hash_lock_t* bucket, int key, int new_key) {
         }
         prev = current;
         current = current->next;
+        
     }
 
     pthread_mutex_unlock(&bucket->table[oldIndex].mutex);
