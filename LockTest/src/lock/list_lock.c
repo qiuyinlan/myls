@@ -54,6 +54,7 @@ int getListSize(list_lock_t* list) {
         current = current->next;
     }
     
+    
     pthread_mutex_unlock(&list->mutex);
     perror("This function is not implemented");
     return size;
