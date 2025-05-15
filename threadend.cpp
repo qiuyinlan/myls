@@ -108,6 +108,7 @@ void jiecheng(int start,int &result)
 }
 void printTask(int i) {
     lock_guard<mutex> lock(Threadpool::printMutex);
+    
     //cout << "Task " << id << " is being executed by thread " << pthread_self() << endl;
     int result;
     jiecheng(i,result);
