@@ -113,6 +113,7 @@ void printTask(int i) {
     int result;
     jiecheng(i,result);
     cout << i << "的阶乘为" << result << endl;
+    
     }
     int main()
     {
