@@ -60,6 +60,7 @@
     "errno.h": "c",
     "cstdlib": "c",
     "疑问": "cpp",
-    "time.h": "c"
+    "time.h": "c",
+    "ostream": "cpp"
   }
 }

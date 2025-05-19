@@ -112,6 +112,7 @@ void printTask(int i) {
     //cout << "Task " << id << " is being executed by thread " << pthread_self() << endl;
     int result;
     jiecheng(i,result);
+    
     cout << i << "的阶乘为" << result << endl;
     
     }
