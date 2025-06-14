@@ -14,6 +14,7 @@
 
 ## 第1天: C语言基础与文件I/O
 ### C语言基础回顾
+
 - 数据类型与变量: char, int, bool, 数组, 指针
 - 字符串处理: 字符数组vs std::string, strlen(), strcpy(), strcmp()
 - 内存管理: malloc(), free(), 栈与堆
